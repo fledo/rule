@@ -1,5 +1,5 @@
 # rule
-Pass commands to iptables.
+Pass commands to iptables and create firewall rules with a simple syntax.
 
 ## Help
 
@@ -13,7 +13,7 @@ Create or remove inbound rule for specifiec protocol and port. Related and estab
 
 ### Out
 
-Create or remove outbound rule. Related or established inbound traffic will be allowed.
+Create or remove outbound rule for specifiec protocol and port. Related or established inbound traffic will be allowed.
 
     out <protocol> <port> [chain] [source]
 
@@ -31,7 +31,7 @@ Save current rules to file. Defaults to /etc/iptables/rules.v4
 
 ### Flush
 
-Remove current rules, sets policy for default chains to DROP, allows loopback and ICMP. Several more default rules will be added unless `[action]` is `all`.
+Remove current rules, sets policy for default chains to DROP, allows loopback and ICMP. Several more [default](#default) rules will be added unless `[action]` is `all`.
 
     flush [action]
 
@@ -94,9 +94,14 @@ Enable/Disable logging:
 Remove all rules and apply default set:
 
     rule flush
+    
+Set output policy to drop:
+
+    rule policy output drop
 
 ## License
 
+```
 The MIT License (MIT)
 
 Copyright (c) 2016 Fred Uggla
@@ -118,3 +123,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```
