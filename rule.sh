@@ -312,7 +312,7 @@ case $1 in
         flush $2
     ;;
     policy)
-        iptables --policy ${1^^} ${2^^}
+        iptables --policy ${2^^} ${3^^}
     ;;
     save)
         save $2
