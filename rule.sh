@@ -173,7 +173,7 @@ usage() {
 	;;
 
 	flush)
-		echo "Flush all rules and apply default rules.
+		echo "Flush all rules, set policy for default chain to drop, allow ICMP, Loopback and apply default rules.
 
 	Usage rule flush [action]
 
@@ -207,7 +207,7 @@ usage() {
 	;;
 
 	log)
-		echo "Create rule for traffic logging. Already applied rule will be removed.
+		echo "Create rules for traffic logging on default chains. Already applied rule will be removed.
 
 	Usage: rule log [limit] [level]
 
@@ -237,7 +237,7 @@ usage() {
 
 		[section]
 
-			Show specific section. in/out/policy/save/log/show/help/examples/default"
+			Show specific section. in/out/policy/save/flush/log/show/help/examples/default"
 	;;
 
 	examples)
@@ -261,7 +261,7 @@ usage() {
 	;;
 
 	default)
-		echo "Toggle default rules. Already applied rules will be removed.
+		echo "Apply default rules. Already applied rules will be removed.
 
 	Usage: rule default
 
