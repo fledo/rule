@@ -287,6 +287,10 @@ usage() {
 
 		Set policy for built-in chain.
 
+	rule flush [action]
+
+		Flush all rules and apply default rules.
+
 	save [file]
 
 		Save current rules to file.
