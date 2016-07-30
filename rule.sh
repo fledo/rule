@@ -251,13 +251,13 @@ usage() {
 
 		rule in tcp 80,443
 
-	Allow incoming tcp on port 22 from specific IPs
+	Allow incoming tcp on port 1521 from specific IPs
 
-		rule in tcp 22 accept 10.0.0.2,10.0.0.3
+		rule in tcp 1521 accept 10.0.0.2,10.0.0.3
 
 	Allow outgoing tcp to port 80, 443 and 5000 to 5050 to specific subnet 
 
-		rule out tcp 21,5000:5050 accept 192.168.0.1/24"
+		rule out tcp 80,443,5000:5050 accept 192.168.0.1/24"
 	;;
 
 	default)
