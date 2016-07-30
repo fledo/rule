@@ -31,7 +31,7 @@ default() {
 #		2	Protocol
 #		3	Destination port(s). Single, comma separated, or range xxxx:yyyy"
 #		4	Rule target. Default "ACCEPT"
-#		5	Input sorce(s) or output destination(s). Single IP, comma separated or CIDR range.			  
+#		5	Input sorce(s) or output destination(s). Single IP, comma separated or CIDR range.
 rule() {
 	target=${4:-ACCEPT} # Default value
 	target=${target^^}	# iptables likes capital letters.
@@ -130,103 +130,103 @@ usage() {
 	case $1 in
 	in) 
 		echo "Create a rule for incoming traffic. Outgoing related/established traffic will be allowed. Already applied rule will be removed.
-	
+
 	Usage: rule in <protocol> <port> [chain] [source]
-		
+
 		<protocol>
-			
+
 			The protocol of the rule. can be 'tcp', 'udp', 'icmp' or 'all'.
 
-		port			
+		<port>
 
 			The port to open for incoming traffic. Single '22', multiple '80,443', range '5000:5010'.
-		
-		chain
+
+		[chain]
 
 			Optional chain target. Default: 'accept'. Can also be 'drop', 'reject' or user defined.
 
-		source			
+		[source]
 
 			Optional source address. Default 'none/all'. Can be  Single, comma separated or CIDR annotation."
 	;;
 
 	out)
 		echo "Create a rule for outgoing traffic. Incoming related/established traffic will be allowed. Alreay applied rule will be removed.
-	
+
 	Usage: rule out <protocol> <port> [chain] [destination]
-	 
-		protocol		
-			
+
+		<protocol>
+
 			The protocol of the rule. can be 'tcp', 'udp', 'icmp' or 'all'.
 
-		port			
+		<port>
 
 			The port to open for incoming traffic. Single '22', multiple '80,443', range '5000:5010'.
-		
-		chain
+
+		[chain]
 
 			Optional chain target. Default: 'accept'. Can also be 'drop', 'reject' or user defined.
 
-		source			
+		[source]
 
-			Optional source address. Default 'none/all'. Can be  Single, comma separated or CIDR annotation."	 
+			Optional source address. Default 'none/all'. Can be  Single, comma separated or CIDR annotation."
 	;;
 
 	flush)
 		echo "Flush all rules and apply default rules.
-	
+
 	Usage rule flush [action]
-		
-		action			
+
+		[action]
 
 			If 'all' then rules will be flushed and no default rules will be applied. This will lock you out from the system."
 	;;
 
 	policy)
 		echo "Set default policy for a chain.
-	
+
 	Usage: rule pocily <chain> <target> 
-		
-		chain
+
+		<chain>
 
 			Name of chain where to apply policy: 'input', 'output', 'forward' or user defined.
-		
-		policy			
+
+		<policy>
 
 			Name of policy to apply to chain: 'accept', 'reject' or 'drop'."
 	;;
 
 	save) 
 		echo "Save current rules to file.
-	
+
 	Usage: rule save [file]
-		
-		file
+
+		[file]
 
 			Target file to save rules. Default: '/etc/iptables/rules.v4'"
 	;;
 
 	log)
 		echo "Create rule for traffic logging. Already applied rule will be removed.
-	
+
 	Usage: rule log [limit] [level]
 
-		limit
+		[limit]
 
 			Number of logged packets per minute. Default: '15'.
-		
-		level
+
+		[level]
 
 			Log level: '0' emergency, '1' alert, '2' critical, '3' error, '4' warning, '5' notice, '6' info, '7' debug. Default: '7'."
 	;;
 
 	show)
 		echo "Show current rules.
-	
+
 	Usage: rule show [chain]
 
-		chain
-	
+		[chain]
+
 			Name of chain to show."
 	;;
 
@@ -234,9 +234,9 @@ usage() {
 		echo "Show help
 
 	Usage: rule show [section]
-	
-		section
-			
+
+		[section]
+
 			Show specific section. in/out/policy/save/log/show/help/examples/default"
 	;;
 
@@ -244,13 +244,13 @@ usage() {
 		echo "Examples
 
 	Allow incoming tcp on port 22
-		
+
 		rule in tcp 22
-	
+
 	Allow incoming tcp on port 80 and 443
-		
+
 		rule in tcp 80,443
-	
+
 	Allow incoming tcp on port 22 from specific IPs
 
 		rule in tcp 22 accept 10.0.0.2,10.0.0.3
@@ -259,10 +259,10 @@ usage() {
 
 		rule out tcp 21,5000:5050 accept 192.168.0.1/24"
 	;;
-	
+
 	default)
 		echo "Toggle default rules. Already applied rules will be removed.
-	
+
 	Usage: rule default
 
 		rule out tcp 80,443 # HTTP/HTTPS
@@ -274,8 +274,8 @@ usage() {
 	;;
 	*)
 		echo "Configure firewall with iptables.
-		
-	in <protocol> <port> [chain] [destination]			
+
+	in <protocol> <port> [chain] [destination]
 
 		Create inbound rule.
 
@@ -284,8 +284,8 @@ usage() {
 		Create outbound rule.
 
 	pocily <chain> <target>
-	
-		Set policy for built-in chain.	  
+
+		Set policy for built-in chain.
 
 	save [file]
 
@@ -339,7 +339,7 @@ case $1 in
 	;;
 	default)
 		default
-	;;	  
+	;;
 	*)
 		echo -e "Unknown command: $1\nUsage: rule [ in | out | flush | policy | save | log | show | help | examples | default ]"
 esac
