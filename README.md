@@ -21,7 +21,7 @@ Create or remove outbound rule for specifiec protocol and port. Related or estab
 
 Set policy for built-in chain.
 
-    pocily <chain> <target>
+    policy <chain> <target>
 
 ### Save
 
