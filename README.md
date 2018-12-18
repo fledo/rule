@@ -5,7 +5,30 @@ Pass commands to iptables and create firewall rules with a simple syntax.
 
 Allow inbound tcp port 22:
 
+    # rule in tcp 22
+    Applied: INPUT -p tcp -m multiport --dports 80 -j ACCEPT
+    Applied: OUTPUT -p tcp -m multiport --sports 80 -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+Show all rules:
+
+    # rule show
+    Chain INPUT (policy DROP)
+    target     prot opt source               destination         
+    ACCEPT     tcp  --  0.0.0.0/0            0.0.0.0/0            multiport dports 22
+
+    Chain FORWARD (policy DROP)
+    target     prot opt source               destination         
+
+    Chain OUTPUT (policy DROP)
+    target     prot opt source               destination         
+    ACCEPT     tcp  --  0.0.0.0/0            0.0.0.0/0            multiport sports 22 state RELATED,ESTABLISHED
+
+
+Remove the previously applied rule allowing incoming traffic on tcp port 22 by repeating the command:
+
     rule in tcp 22
+    Removed: INPUT -p tcp -m multiport --dports 80 -j ACCEPT
+    Removed: OUTPUT -p tcp -m multiport --sports 80 -m state --state RELATED,ESTABLISHED -j ACCEPT
 
 Allow outbound tcp 80 and tcp 443:
 
