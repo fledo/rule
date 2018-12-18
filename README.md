@@ -3,7 +3,7 @@ Pass commands to iptables and create firewall rules with a simple syntax.
 
 ## Examples
 
-Add a rule to allow inbound tcp port 22.
+Allow inbound tcp port 22:
 
     rule in tcp 22
 
@@ -11,7 +11,7 @@ Allow outbound tcp 80 and tcp 443:
 
     rule out tcp 80,443
 
-Allow incoming tcp port 1521 from specific sources:
+Allow incoming tcp port 1521 from specific IPs:
 
     rule in tcp 1521 accept 10.0.0.2,10.0.0.4
 
