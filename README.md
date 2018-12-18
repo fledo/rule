@@ -1,6 +1,36 @@
 # rule
 Pass commands to iptables and create firewall rules with a simple syntax.
 
+## Examples
+
+Add a rule to allow inbound tcp port 22.
+
+    rule in tcp 22
+
+Allow outbound tcp 80 and tcp 443:
+
+    rule out tcp 80,443
+
+Allow incoming tcp port 1521 from specific sources:
+
+    rule in tcp 1521 accept 10.0.0.2,10.0.0.4
+
+Allow outgoing tcp to port 80, 443 and 5000 to 5050 to a specific subnet:
+
+    rule out tcp 80,443,5000:5050 accept 192.168.0.0/24
+
+Enable/Disable logging:
+
+    rule log
+
+Remove all rules and apply default set:
+
+    rule flush
+    
+Set output policy to drop:
+
+    rule policy output drop
+
 ## Help
 
 For further information, run `rule help [command]`.
@@ -67,37 +97,6 @@ Triggers the following commands:
     rule out udp 123    # NTP
     rule out tcp 22     # SSH out
     rule in tcp 22      # SSH in
-
-
-## Examples
-
-Add a rule to allow inbound tcp port 22.
-
-    rule in tcp 22
-
-Allow outbound tcp 80 and tcp 443:
-
-    rule out tcp 80,443
-
-Allow incoming tcp port 1521 from specific sources:
-
-    rule in tcp 1521 accept 10.0.0.2,10.0.0.4
-
-Allow outgoing tcp to port 80, 443 and 5000 to 5050 to a specific subnet:
-
-    rule out tcp 80,443,5000:5050 accept 192.168.0.0/24
-
-Enable/Disable logging:
-
-    rule log
-
-Remove all rules and apply default set:
-
-    rule flush
-    
-Set output policy to drop:
-
-    rule policy output drop
 
 ## License
 
