@@ -1,13 +1,44 @@
 # rule
-Pass commands to iptables and create firewall rules with a simple syntax.
+
+Configure a firewall by converting simple commands to iptables syntax. Most **rule** commands will print output the iptables string it executes.
 
 ## Examples
 
 Allow inbound tcp port 22:
 
     # rule in tcp 22
-    Applied: INPUT -p tcp -m multiport --dports 80 -j ACCEPT
-    Applied: OUTPUT -p tcp -m multiport --sports 80 -m state --state RELATED,ESTABLISHED -j ACCEPT
+    Applied: INPUT -p tcp -m multiport --dports 22 -j ACCEPT
+    Applied: OUTPUT -p tcp -m multiport --sports 22 -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+Remove the previously applied rule allowing incoming traffic on tcp port 22 by repeating the command:
+
+    # rule in tcp 22
+    Removed: INPUT -p tcp -m multiport --dports 22 -j ACCEPT
+    Removed: OUTPUT -p tcp -m multiport --sports 22 -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+Allow outbound tcp 80 and tcp 443:
+
+    # rule out tcp 80,443
+
+Allow incoming tcp port 1521 from two specific IPs:
+
+    # rule in tcp 1521 accept 10.0.0.2,10.0.0.4
+
+Allow outgoing tcp to port 80, 443 and 5000 to 5050 to a specific subnet:
+
+    # rule out tcp 80,443,5000:5050 accept 192.168.0.0/24
+
+Enable/Disable logging:
+
+    # rule log
+
+Remove all rules and apply default set:
+
+    # rule flush
+    
+Set output policy to drop:
+
+    # rule policy output drop
 
 Show all rules:
 
@@ -22,37 +53,6 @@ Show all rules:
     Chain OUTPUT (policy DROP)
     target     prot opt source               destination         
     ACCEPT     tcp  --  0.0.0.0/0            0.0.0.0/0            multiport sports 22 state RELATED,ESTABLISHED
-
-
-Remove the previously applied rule allowing incoming traffic on tcp port 22 by repeating the command:
-
-    rule in tcp 22
-    Removed: INPUT -p tcp -m multiport --dports 80 -j ACCEPT
-    Removed: OUTPUT -p tcp -m multiport --sports 80 -m state --state RELATED,ESTABLISHED -j ACCEPT
-
-Allow outbound tcp 80 and tcp 443:
-
-    rule out tcp 80,443
-
-Allow incoming tcp port 1521 from specific IPs:
-
-    rule in tcp 1521 accept 10.0.0.2,10.0.0.4
-
-Allow outgoing tcp to port 80, 443 and 5000 to 5050 to a specific subnet:
-
-    rule out tcp 80,443,5000:5050 accept 192.168.0.0/24
-
-Enable/Disable logging:
-
-    rule log
-
-Remove all rules and apply default set:
-
-    rule flush
-    
-Set output policy to drop:
-
-    rule policy output drop
 
 ## Help
 
